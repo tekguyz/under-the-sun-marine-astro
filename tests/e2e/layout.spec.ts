@@ -60,6 +60,10 @@ test('footer has contact and social links', async ({ page }) => {
 test('mobile call bar shows on phones only', async ({ page }, info) => {
   const bar = page.locator('[data-callbar]');
   if (info.project.name === 'mobile') {
+    // Hidden while the hero buttons are on screen, shown once they scroll away.
+    await expect(bar).toHaveAttribute('data-hidden', '');
+    await page.locator('#work').scrollIntoViewIfNeeded();
+    await expect(bar).not.toHaveAttribute('data-hidden');
     await expect(bar).toBeVisible();
     await expect(bar.getByRole('link', { name: /call/i })).toHaveAttribute('href', 'tel:+15615605050');
     await expect(bar.getByRole('link', { name: /text/i })).toHaveAttribute('href', 'sms:+15615605050');

@@ -24,11 +24,20 @@
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 5rem;
+    accent-color: var(--color-sun-500);
+    caret-color: var(--color-sun-600);
+    scrollbar-color: var(--color-navy-700) var(--color-sand);
   }
   body {
     @apply bg-shell font-sans text-ink antialiased;
     font-size: 1.0625rem;
   }
+  ::selection {
+    background: var(--color-sun-400);
+    color: var(--color-navy-900);
+  }
+  h1, h2, h3 { text-wrap: balance; }
+  p { text-wrap: pretty; }
   :focus-visible {
     @apply outline-2 outline-offset-2 outline-sun-500;
   }
@@ -41,24 +50,36 @@
   .btn {
     @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 font-semibold whitespace-nowrap transition duration-150 active:scale-[0.97];
   }
-  .btn-primary { @apply bg-sun-500 text-navy-900 hover:bg-sun-400; }
+  .btn-primary { @apply bg-sun-500 text-navy-900 shadow-[0_6px_18px_-8px_rgb(242_106_33/0.7)] hover:bg-sun-400; }
   .btn-dark { @apply bg-navy-900 text-white hover:bg-navy-700; }
   .btn-ghost { @apply border border-navy-900/20 text-navy-900 hover:bg-navy-900/5; }
   .btn-ghost-light { @apply border border-white/30 text-white hover:bg-white/10; }
-  .eyebrow { @apply text-sm font-semibold tracking-[0.18em] text-sun-700 uppercase; }
+  .label { @apply text-sm font-semibold tracking-[0.14em] text-ink-muted uppercase; }
   .section { @apply py-20 sm:py-28; }
   .section-title {
-    @apply mt-3 font-display text-4xl leading-[0.95] font-extrabold tracking-tight text-navy-900 uppercase italic sm:text-5xl;
+    @apply font-display text-[2.5rem] leading-[0.92] font-extrabold tracking-[-0.01em] text-navy-900 uppercase italic sm:text-6xl;
+  }
+  /* Logo sun: the one brand motif, used behind photos. */
+  .sun-disc {
+    background: radial-gradient(circle at 50% 30%, var(--color-sun-400), var(--color-sun-500) 55%, var(--color-sun-600));
+    border-radius: 9999px;
   }
 }
+
+/* The page's one authored motion moment: the sun rises behind the hero photo. */
+@keyframes sunrise {
+  from { transform: translateY(40%) scale(0.92); opacity: 0.2; }
+  to { transform: none; opacity: 1; }
+}
+.sun-rise { animation: sunrise 1600ms var(--ease-out-soft) 200ms both; }
 
 /* Scroll reveal: only hides content when JS has marked the page. */
 .js [data-reveal] {
   opacity: 0;
-  transform: translateY(18px);
+  transform: translateY(12px);
   transition:
-    opacity 600ms var(--ease-out-soft),
-    transform 600ms var(--ease-out-soft);
+    opacity 500ms var(--ease-out-soft),
+    transform 500ms var(--ease-out-soft);
   transition-delay: var(--reveal-delay, 0ms);
 }
 .js [data-reveal].is-visible,
@@ -74,6 +95,11 @@
   }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
     transition-duration: 0.01ms !important;
   }
+}
+@media print {
+  .js [data-reveal] { opacity: 1; transform: none; }
+  [data-callbar], [data-header] { display: none; }
 }

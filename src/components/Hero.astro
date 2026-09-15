@@ -5,39 +5,42 @@ import WaveDivider from './WaveDivider.astro';
 import { hero } from '../data/photos';
 import { site, tel, sms } from '../data/site';
 ---
-<section id="top" class="relative overflow-hidden bg-navy-900 text-white">
-  <div class="mx-auto grid max-w-6xl gap-10 px-4 pt-12 pb-10 sm:px-6 lg:grid-cols-12 lg:items-center lg:gap-14 lg:pt-20 lg:pb-16">
+<section id="top" class="relative isolate overflow-hidden bg-navy-900 text-white">
+  <div class="mx-auto grid max-w-6xl gap-12 px-4 pt-10 pb-8 sm:px-6 sm:pt-16 lg:grid-cols-12 lg:items-center lg:gap-10 lg:pt-20 lg:pb-12">
     <div class="lg:col-span-7">
-      <p class="text-sm font-semibold tracking-[0.18em] text-sun-400 uppercase">Mobile boat repair · South Florida</p>
-      <h1 class="mt-4 font-display text-[3.25rem] leading-[0.9] font-extrabold tracking-tight uppercase italic sm:text-7xl lg:text-8xl">
-        Boat repair that comes <span class="text-sun-400">to your dock</span>
+      <h1 class="font-display text-[clamp(2.9rem,13.5vw,5.75rem)] leading-[0.86] font-extrabold tracking-[-0.01em] uppercase italic">
+        <span class="block">Boat repair</span>
+        <span class="block">that comes</span>
+        <span class="block text-sun-400">to your dock</span>
       </h1>
-      <p class="mt-6 max-w-xl text-lg text-white/80 sm:text-xl">
-        Engine trouble, electrical issues, or a boat that needs a real clean-up? Jack comes to your dock, marina, or home anywhere from Palm Beach to Miami.
+      <p class="mt-7 max-w-[34rem] text-lg leading-relaxed text-white/80 sm:text-xl">
+        Engine trouble, electrical issues, or a boat that needs a real clean-up? Jack comes to your dock, marina, or home, anywhere from Palm Beach to Miami.
       </p>
-      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-        <a href="#contact" class="btn btn-primary px-7 py-3.5 text-base">
-          Request service <Icon name="arrow-right" class="size-4" />
+      <div data-hero-cta class="mt-8 flex flex-col gap-3 sm:flex-row">
+        <a href="#contact" class="btn btn-primary group px-7 py-4 text-base">
+          Request service <Icon name="arrow-right" class="size-4 transition-transform group-hover:translate-x-1" />
         </a>
-        <a href={tel} class="btn btn-ghost-light px-7 py-3.5 text-base">
-          <Icon name="phone" class="size-4" /> Call {site.phoneDisplay}
+        <a href={tel} class="btn btn-ghost-light px-7 py-4 text-base">
+          <Icon name="phone" class="size-4 text-sun-400" /> Call {site.phoneDisplay}
         </a>
       </div>
       <p class="mt-5 text-sm text-white/70">
-        On the water right now?
-        <a href={sms} class="font-semibold text-white underline underline-offset-4 hover:text-sun-400">Text Jack</a>
+        On the water right now?{' '}
+        <a href={sms} class="font-semibold text-white underline decoration-sun-400 decoration-2 underline-offset-4 hover:text-sun-400">Text Jack</a>
       </p>
     </div>
-    <div class="lg:col-span-5">
+
+    <div class="relative mx-auto w-full max-w-md lg:col-span-5 lg:max-w-none">
+      <div class="sun-disc sun-rise absolute -top-10 -right-8 size-52 sm:size-64 lg:-top-12 lg:-right-12 lg:size-72" aria-hidden="true"></div>
       <Picture
         src={hero.src}
         alt={hero.alt}
         formats={['avif', 'webp']}
         widths={[480, 720, 960, 1280]}
-        sizes="(min-width: 1024px) 460px, 100vw"
+        sizes="(min-width: 1024px) 460px, (min-width: 640px) 448px, 100vw"
         loading="eager"
         fetchpriority="high"
-        class="aspect-4/3 w-full rounded-3xl object-cover shadow-2xl ring-1 ring-white/10 lg:aspect-4/5"
+        class="relative aspect-4/3 w-full rounded-[2rem] object-cover shadow-[0_30px_60px_-20px_rgb(0_0_0/0.6)] lg:aspect-4/5"
       />
     </div>
   </div>

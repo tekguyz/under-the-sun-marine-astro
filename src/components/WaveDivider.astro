@@ -5,11 +5,13 @@ interface Props {
 }
 const { class: className = '', flip = false } = Astro.props;
 ---
+<!-- Two stacked waves, echoing the logo. Fill is currentColor. -->
 <svg
-  class={`block h-10 w-full sm:h-16 ${flip ? 'rotate-180' : ''} ${className}`}
-  viewBox="0 0 1440 80"
+  class={`block h-12 w-full sm:h-20 ${flip ? 'rotate-180' : ''} ${className}`}
+  viewBox="0 0 1440 90"
   preserveAspectRatio="none"
   aria-hidden="true"
 >
-  <path fill="currentColor" d="M0 50C160 22 320 12 480 28s320 46 480 40 320-36 480-44v56H0z" />
+  <path fill="currentColor" opacity="0.3" d="M0 40C190 12 380 4 580 26s380 46 560 36 220-26 300-32v60H0z" />
+  <path fill="currentColor" d="M0 60C160 34 320 24 480 40s320 42 480 36 320-30 480-38v52H0z" />
 </svg>

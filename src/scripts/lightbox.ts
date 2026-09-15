@@ -19,9 +19,12 @@ if (dialog && links.length) {
 
   links.forEach((link, i) =>
     link.addEventListener('click', (event) => {
+      // Let Ctrl/Cmd/Shift-click open the photo in a new tab or window.
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
       event.preventDefault();
       opener = link;
       show(i);
+      document.documentElement.style.overflow = 'hidden';
       dialog.showModal();
     }),
   );
@@ -47,5 +50,8 @@ if (dialog && links.length) {
     if (Math.abs(dx) > 50) show(index + (dx < 0 ? 1 : -1));
   });
 
-  dialog.addEventListener('close', () => opener?.focus());
+  dialog.addEventListener('close', () => {
+    document.documentElement.style.overflow = '';
+    opener?.focus();
+  });
 }

@@ -25,6 +25,11 @@ describe('validateContact', () => {
     expect(validateContact({ ...valid, phone: '+1 (561) 555-0199' }).phone).toBeUndefined();
   });
 
+  it('accepts international numbers that start with +', () => {
+    expect(validateContact({ ...valid, phone: '+44 20 7946 0958' }).phone).toBeUndefined();
+    expect(validateContact({ ...valid, phone: '+44 12' }).phone).toBeDefined();
+  });
+
   it('checks email only when given', () => {
     expect(validateContact({ ...valid, email: 'nope' }).email).toBeDefined();
     expect(validateContact({ ...valid, email: 'sam@example.com' }).email).toBeUndefined();

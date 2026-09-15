@@ -35,7 +35,33 @@ test.describe('SEO and head', () => {
   test('fonts are loaded from Astro fonts', async ({ page }) => {
     const family = await page.evaluate(() => getComputedStyle(document.body).fontFamily);
     expect(family).toMatch(/Barlow/);
+    // The font files must actually load, not just be declared.
+    const loaded = await page.evaluate(async () => {
+      await document.fonts.ready;
+      const faces = [...document.fonts].filter((f) => /Barlow/.test(f.family));
+      await Promise.all(faces.map((f) => f.load().catch(() => null)));
+      return faces.some((f) => f.status === 'loaded');
+    });
+    expect(loaded).toBe(true);
   });
+});
+
+test('sitemap lists the home page and not /thanks', async ({ request }) => {
+  const index = await (await request.get('/sitemap-index.xml')).text();
+  const child = index.match(/<loc>https:\/\/underthesunmarine\.com(\/[^<]+)<\/loc>/)![1];
+  const body = await (await request.get(child)).text();
+  expect(body).toContain('<loc>https://underthesunmarine.com/</loc>');
+  expect(body).not.toContain('/thanks');
+});
+
+test('head and alt text have no banned claims', async ({ page }) => {
+  await page.goto('/');
+  const text = await page.evaluate(
+    () =>
+      document.head.innerHTML +
+      [...document.querySelectorAll('img')].map((img) => img.alt).join(' '),
+  );
+  expect(text).not.toMatch(/licensed|insured|\bOEM\b|certified|guarantee/i);
 });
 
 test.describe('static brand files', () => {
