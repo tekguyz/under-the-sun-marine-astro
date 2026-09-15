@@ -30,6 +30,33 @@ test('page has no banned claims', async ({ page }) => {
   expect(text).not.toMatch(/licensed|insured|\bOEM\b|markup|master|certified|guarantee|north keys/i);
 });
 
+test('services shows three groups with Jack\'s items', async ({ page }) => {
+  const groups = page.locator('#services [data-service]');
+  await expect(groups).toHaveCount(3);
+  await expect(groups.nth(0)).toContainText('Engine & Mechanical');
+  await expect(groups.nth(0)).toContainText('Engine diagnostics & repair');
+  await expect(groups.nth(1)).toContainText('Electrical & Electronics');
+  await expect(groups.nth(1)).toContainText('Custom rigging');
+  await expect(groups.nth(2)).toContainText('Detailing');
+});
+
+test('about uses Jack\'s own words', async ({ page }) => {
+  const about = page.locator('#about');
+  await expect(about.getByRole('heading', { level: 2 })).toBeAttached();
+  await expect(about).toContainText('my name is Jack');
+  await expect(about).toContainText('treating every boat like it');
+  await expect(about.locator('img')).toHaveAttribute('alt', /Jack/);
+});
+
+test('footer has contact and social links', async ({ page }) => {
+  const footer = page.locator('footer');
+  await expect(footer.getByRole('link', { name: /560-5050/ })).toHaveAttribute('href', 'tel:+15615605050');
+  await expect(footer.getByRole('link', { name: /Utsboatrepair@gmail.com/i })).toHaveAttribute('href', 'mailto:Utsboatrepair@gmail.com');
+  await expect(footer.getByRole('link', { name: /instagram/i })).toHaveAttribute('href', 'https://www.instagram.com/underthesunmarine/');
+  await expect(footer.getByRole('link', { name: /tiktok/i })).toHaveAttribute('href', 'https://www.tiktok.com/@under.the.sun.marine');
+  await expect(footer).toContainText(String(new Date().getFullYear()));
+});
+
 test('mobile call bar shows on phones only', async ({ page }, info) => {
   const bar = page.locator('[data-callbar]');
   if (info.project.name === 'mobile') {
