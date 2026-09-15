@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+import { site, tel } from '../data/site';
+---
+<Base title={`Thanks | ${site.name}`} path="/thanks" noindex>
+  <main class="flex min-h-dvh items-center justify-center bg-navy-900 px-4 text-center text-white">
+    <div class="max-w-lg">
+      <p class="text-sm font-semibold tracking-[0.18em] text-sun-400 uppercase">Request sent</p>
+      <h1 class="mt-3 font-display text-6xl font-extrabold uppercase italic">Thanks!</h1>
+      <p class="mt-4 text-lg text-white/80">
+        Jack got your message and will reach out soon. Need him faster? Call or text
+        <a href={tel} class="font-semibold text-white underline underline-offset-4">{site.phoneDisplay}</a>.
+      </p>
+      <a href="/" class="btn btn-primary mt-8 px-7 py-3.5">Back to home</a>
+    </div>
+  </main>
+</Base>
