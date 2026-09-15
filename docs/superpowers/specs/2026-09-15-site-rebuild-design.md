@@ -82,8 +82,8 @@ Build all copy from Jack's own Instagram post (below). Tighten for the web, keep
    on scroll. No hamburger needed if links fit; otherwise a small menu.
 2. **Hero** — headline on the idea "Mobile boat repair at your dock, marina, or home";
    short line on South Florida; primary CTA "Request service" (→ #contact), secondary
-   "Call (561) 560-5050". Real photo (candidate: `work5.jpg` Jack at the helm, or
-   `work6.jpg` outboard work). Chosen during design pass.
+   "Call (561) 560-5050". Real photo: `work3.jpg` (Jack working on an outboard).
+   Alternate: `work1.jpg` (Jack at the helm). May be swapped during the design pass.
 3. **Services** — three groups:
    - Engine & Mechanical: engine diagnostics & repair; pumps
    - Electrical & Electronics: marine electrical work; electronics installation;
