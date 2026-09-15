@@ -1,20 +1,27 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Under The Sun Marine
 
-# Run and deploy your AI Studio app
+One-page Astro site for Under The Sun Marine, hosted on Netlify.
 
-This contains everything you need to run your app locally.
+## Run
 
-View your app in AI Studio: https://ai.studio/apps/fd8ccf4c-388f-4470-8f2a-5a88907950ea
+```bash
+npm install
+npm run dev
+```
 
-## Run Locally
+## Test
 
-**Prerequisites:**  Node.js
+```bash
+npm test
+npx playwright install chromium
+npm run test:e2e
+```
 
+## Images and icons
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+Photos live in `src/assets/work`. To add a photo, put the original in `public/work`, run `npm run images`, then delete the original from `public/work`.
+Icons and the share image are built by `npm run icons`.
+
+## Deploy
+
+Netlify builds `npm run build` and publishes `dist`. The contact form is the Netlify form named `contact`.
