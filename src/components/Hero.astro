@@ -1,0 +1,45 @@
+---
+import { Picture } from 'astro:assets';
+import Icon from './Icon.astro';
+import WaveDivider from './WaveDivider.astro';
+import { hero } from '../data/photos';
+import { site, tel, sms } from '../data/site';
+---
+<section id="top" class="relative overflow-hidden bg-navy-900 text-white">
+  <div class="mx-auto grid max-w-6xl gap-10 px-4 pt-12 pb-10 sm:px-6 lg:grid-cols-12 lg:items-center lg:gap-14 lg:pt-20 lg:pb-16">
+    <div class="lg:col-span-7">
+      <p class="text-sm font-semibold tracking-[0.18em] text-sun-400 uppercase">Mobile boat repair · South Florida</p>
+      <h1 class="mt-4 font-display text-[3.25rem] leading-[0.9] font-extrabold tracking-tight uppercase italic sm:text-7xl lg:text-8xl">
+        Boat repair that comes <span class="text-sun-400">to your dock</span>
+      </h1>
+      <p class="mt-6 max-w-xl text-lg text-white/80 sm:text-xl">
+        Engine trouble, electrical issues, or a boat that needs a real clean-up? Jack comes to your dock, marina, or home anywhere from Palm Beach to Miami.
+      </p>
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+        <a href="#contact" class="btn btn-primary px-7 py-3.5 text-base">
+          Request service <Icon name="arrow-right" class="size-4" />
+        </a>
+        <a href={tel} class="btn btn-ghost-light px-7 py-3.5 text-base">
+          <Icon name="phone" class="size-4" /> Call {site.phoneDisplay}
+        </a>
+      </div>
+      <p class="mt-5 text-sm text-white/70">
+        On the water right now?
+        <a href={sms} class="font-semibold text-white underline underline-offset-4 hover:text-sun-400">Text Jack</a>
+      </p>
+    </div>
+    <div class="lg:col-span-5">
+      <Picture
+        src={hero.src}
+        alt={hero.alt}
+        formats={['avif', 'webp']}
+        widths={[480, 720, 960, 1280]}
+        sizes="(min-width: 1024px) 460px, 100vw"
+        loading="eager"
+        fetchpriority="high"
+        class="aspect-4/3 w-full rounded-3xl object-cover shadow-2xl ring-1 ring-white/10 lg:aspect-4/5"
+      />
+    </div>
+  </div>
+  <WaveDivider class="-mb-px text-shell" />
+</section>

@@ -1,0 +1,41 @@
+---
+import { Image } from 'astro:assets';
+import mark from '../assets/brand/logo-mark.png';
+import Icon from './Icon.astro';
+import { site, nav, tel } from '../data/site';
+---
+<header
+  data-header
+  class="sticky top-0 z-40 border-b border-transparent bg-shell/90 backdrop-blur-md transition-[border-color,box-shadow] data-scrolled:border-sand-300 data-scrolled:shadow-sm"
+>
+  <div class="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
+    <a href="#top" class="flex min-w-0 items-center gap-2.5" aria-label={`${site.name}, back to top`}>
+      <Image src={mark} alt="" width={96} class="h-8 w-auto" loading="eager" />
+      <span class="font-display leading-none text-navy-900 uppercase">
+        <span class="block text-lg font-extrabold tracking-tight italic">Under the Sun</span>
+        <span class="block text-[0.62rem] font-semibold tracking-[0.28em] text-sun-700">Marine Services</span>
+      </span>
+    </a>
+    <nav aria-label="Main" class="hidden md:block">
+      <ul class="flex gap-8 font-semibold">
+        {nav.map((item) => (
+          <li><a href={item.href} class="transition-colors hover:text-sun-700">{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+    <a href={tel} class="btn btn-primary shrink-0 px-4 text-sm sm:px-5">
+      <Icon name="phone" class="size-4" />
+      <span class="sm:hidden">Call</span>
+      <span class="hidden sm:inline">Call {site.phoneDisplay}</span>
+    </a>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  if (header) {
+    const onScroll = () => header.toggleAttribute('data-scrolled', window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+</script>

@@ -1,0 +1,21 @@
+---
+import Icon from './Icon.astro';
+import { tel, sms } from '../data/site';
+---
+<div
+  data-callbar
+  class="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 gap-2 border-t border-sand-300 bg-shell/95 px-3 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur-md transition-transform duration-300 data-hidden:translate-y-full md:hidden"
+>
+  <a href={sms} class="btn btn-ghost"><Icon name="message" class="size-4" /> Text</a>
+  <a href={tel} class="btn btn-primary"><Icon name="phone" class="size-4" /> Call Jack</a>
+</div>
+
+<script>
+  const bar = document.querySelector<HTMLElement>('[data-callbar]');
+  const contact = document.getElementById('contact');
+  if (bar && contact && 'IntersectionObserver' in window) {
+    new IntersectionObserver(([entry]) => bar.toggleAttribute('data-hidden', entry.isIntersecting), {
+      threshold: 0.1,
+    }).observe(contact);
+  }
+</script>
