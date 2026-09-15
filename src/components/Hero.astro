@@ -36,8 +36,9 @@ import { site, tel, sms } from '../data/site';
         src={hero.src}
         alt={hero.alt}
         formats={['avif', 'webp']}
-        widths={[480, 720, 960, 1280]}
-        sizes="(min-width: 1024px) 460px, (min-width: 640px) 448px, 100vw"
+        widths={[420, 560, 760, 960]}
+        sizes="(min-width: 1024px) 460px, (min-width: 640px) 448px, calc(100vw - 2rem)"
+        quality={58}
         loading="eager"
         fetchpriority="high"
         class="relative aspect-4/3 w-full rounded-[2rem] object-cover shadow-[0_30px_60px_-20px_rgb(0_0_0/0.6)] lg:aspect-4/5"

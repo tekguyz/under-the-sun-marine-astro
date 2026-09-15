@@ -11,7 +11,8 @@ export default defineConfig({
       provider: fontProviders.fontsource(),
       name: 'Barlow Condensed',
       cssVariable: '--font-barlow-condensed',
-      weights: [600, 700, 800],
+      // Display type is only ever 800; keep the file count (and page weight) low.
+      weights: [800],
       styles: ['normal', 'italic'],
       subsets: ['latin'],
     },
@@ -19,7 +20,7 @@ export default defineConfig({
       provider: fontProviders.fontsource(),
       name: 'Barlow',
       cssVariable: '--font-barlow',
-      weights: [400, 500, 600, 700],
+      weights: [400, 600],
       styles: ['normal'],
       subsets: ['latin'],
     },
