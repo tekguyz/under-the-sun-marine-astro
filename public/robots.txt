@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://underthesunmarine.com/sitemap.xml
+Sitemap: https://underthesunmarine.com/sitemap-index.xml

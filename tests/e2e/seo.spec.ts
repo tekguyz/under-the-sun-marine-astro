@@ -37,3 +37,36 @@ test.describe('SEO and head', () => {
     expect(family).toMatch(/Barlow/);
   });
 });
+
+test.describe('static brand files', () => {
+  const files: [string, RegExp][] = [
+    ['/favicon.svg', /image\/svg\+xml/],
+    ['/favicon.ico', /image\/(x-icon|vnd\.microsoft\.icon)/],
+    ['/apple-touch-icon.png', /image\/png/],
+    ['/icon-192.png', /image\/png/],
+    ['/icon-512.png', /image\/png/],
+    ['/og.jpg', /image\/jpeg/],
+    ['/site.webmanifest', /(manifest\+json|application\/json|octet-stream)/],
+    ['/robots.txt', /text\/plain/],
+    ['/sitemap-index.xml', /xml/],
+  ];
+
+  for (const [path, type] of files) {
+    test(`${path} is served`, async ({ request }) => {
+      const res = await request.get(path);
+      expect(res.status()).toBe(200);
+      expect(res.headers()['content-type']).toMatch(type);
+    });
+  }
+
+  test('robots points to sitemap', async ({ request }) => {
+    const body = await (await request.get('/robots.txt')).text();
+    expect(body).toContain('Sitemap: https://underthesunmarine.com/sitemap-index.xml');
+  });
+
+  test('manifest names the business', async ({ request }) => {
+    const json = JSON.parse(await (await request.get('/site.webmanifest')).text());
+    expect(json.name).toBe('Under The Sun Marine');
+    expect(json.icons).toHaveLength(2);
+  });
+});
