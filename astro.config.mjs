@@ -4,6 +4,8 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   site: 'https://underthesunmarine.com',
+  // The desktop app passes a free port in PORT (autoPort in .claude/launch.json).
+  server: { port: Number(process.env.PORT) || 4321 },
   integrations: [sitemap({ filter: (page) => !page.includes('/thanks') })],
   vite: { plugins: [tailwindcss()] },
   fonts: [
